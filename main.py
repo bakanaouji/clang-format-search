@@ -12,8 +12,70 @@ def evaluate(x):
 
 def sample():
     styles = {
-
+        "AlignConsecutiveAssignments": False,
+        "AlignConsecutiveDeclarations": False,
+        "AlignOperands":   True,
+        "AlignTrailingComments": True,
+        "AllowAllParametersOfDeclarationOnNextLine": True,
+        "AllowShortBlocksOnASingleLine": False,
+        "AllowShortCaseLabelsOnASingleLine": False,
+        "AllowShortIfStatementsOnASingleLine": False,
+        "AllowShortLoopsOnASingleLine": False,
+        "AlwaysBreakBeforeMultilineStrings": False,
+        "AlwaysBreakTemplateDeclarations": False,
+        "BinPackArguments": True,
+        "BinPackParameters": True,
+        "BreakBeforeInheritanceComma": False,
+        "BreakBeforeTernaryOperators": True,
+        "BreakConstructorInitializersBeforeComma": False,
+        "BreakAfterJavaFieldAnnotations": False,
+        "BreakStringLiterals": True,
+        "ColumnLimit":     80,
+        "CompactNamespaces": False,
+        "ConstructorInitializerAllOnOneLineOrOnePerLine": False,
+        "ConstructorInitializerIndentWidth": 4,
+        "ContinuationIndentWidth": 4,
+        "Cpp11BracedListStyle": True,
+        "DerivePointerAlignment": False,
+        "DisableFormat":   False,
+        "ExperimentalAutoDetectBinPacking": False,
+        "FixNamespaceComments": True,
+        "IndentCaseLabels": False,
+        "IndentWidth":     2,
+        "IndentWrappedFunctionNames": False,
+        "JavaScriptWrapImports": True,
+        "KeepEmptyLinesAtTheStartOfBlocks": True,
+        "MaxEmptyLinesToKeep": 1,
+        "ObjCBlockIndentWidth": 2,
+        "ObjCSpaceAfterProperty": False,
+        "ObjCSpaceBeforeProtocolList": True,
+        "PenaltyBreakAssignment": 2,
+        "PenaltyBreakBeforeFirstCallParameter": 19,
+        "PenaltyBreakComment": 300,
+        "PenaltyBreakFirstLessLess": 120,
+        "PenaltyBreakString": 1000,
+        "PenaltyExcessCharacter": 1000000,
+        "PenaltyReturnTypeOnItsOwnLine": 60,
+        "ReflowComments":  True,
+        "SortIncludes":    True,
+        "SortUsingDeclarations": True,
+        "SpaceAfterCStyleCast": False,
+        "SpaceAfterTemplateKeyword": True,
+        "SpaceBeforeAssignmentOperators": True,
+        "SpaceInEmptyParentheses": False,
+        "SpacesBeforeTrailingComments": 1,
+        "SpacesInAngles":  False,
+        "SpacesInContainerLiterals": True,
+        "SpacesInCStyleCastParentheses": False,
+        "SpacesInParentheses": False,
+        "SpacesInSquareBrackets": False
     }
+    for key, val in styles.items():
+        if type(val) == bool:
+            if val:
+                styles[key] = 'true'
+            else:
+                styles[key] = 'false'
     return str(styles)
 
 
