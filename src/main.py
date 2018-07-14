@@ -3,14 +3,14 @@ import os
 import pandas as pd
 
 from function import Function, bool_keys
-from optimizer.random_search import RandomSearch
+from optimizer.random.random_search import RandomSearch
 
 
 def main():
     params = {
         'keys': bool_keys(),
         'obj_func': Function('../sample_src'),
-        'path': '../log/random',
+        'path': '../log/random_search',
         'max_evals': 100
     }
     if not os.path.isdir(params['path']):
