@@ -43,6 +43,16 @@ def bool_keys():
     ]
 
 
+def convert(styles):
+    for key, val in styles.items():
+        if type(val) == bool:
+            if val:
+                styles[key] = 'true'
+            else:
+                styles[key] = 'false'
+    return str(styles)
+
+
 class Function(object):
     def __init__(self, directory_path):
         self.path = directory_path
@@ -52,8 +62,9 @@ class Function(object):
         files = [self.path + '/input.h',
                  self.path + '/input.cpp']
         for file in files:
-            sp.run('clang-format -i -style="' + str(styles) + '" ' + file,
-                   stdout=sp.PIPE)
+            sp.run(
+                'clang-format -i -style="' + str(convert(styles)) + '" ' + file,
+                stdout=sp.PIPE)
             ret_val = sp.run('git diff --numstat ' + file, stdout=sp.PIPE)
             ret_val = ret_val.stdout.decode('utf-8').split('\t')
             if not ret_val == ['']:
