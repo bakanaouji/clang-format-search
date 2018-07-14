@@ -7,6 +7,7 @@ class RandomSearch(object):
         self.obj_func = params['obj_func']
 
         self.g = 0
+        self.evals = 0
         self.fval = float('inf')
         self.styles = None
         self.best_fval = float('inf')
@@ -14,6 +15,7 @@ class RandomSearch(object):
 
     def one_iteration(self):
         self.g += 1
+        self.evals += 1
         self.styles = self.sample()
         self.fval = self.obj_func.evaluate(self.styles)
 

@@ -1,5 +1,6 @@
 import json
 import os
+import pandas as pd
 
 from function import Function, bool_keys
 from optimizer.random_search import RandomSearch
@@ -9,17 +10,27 @@ def main():
     params = {
         'keys': bool_keys(),
         'obj_func': Function('../sample_src'),
-        'path': '../log/random'
+        'path': '../log/random',
+        'max_evals': 100
     }
     if not os.path.isdir(params['path']):
         os.makedirs(params['path'])
     optimizer = RandomSearch(**params)
 
-    for i in range(10):
+    # optimize
+    log = {'g': [], 'evals': [], 'fval': []}
+    for g in range(params['max_evals']):
         optimizer.one_iteration()
+        # stock log
+        log['g'].append(optimizer.g)
+        log['evals'].append(optimizer.evals)
+        log['fval'].append(optimizer.fval)
         print(optimizer.g, optimizer.fval, optimizer.styles)
 
-    # save best styles
+    # save log
+    df = pd.DataFrame(log)
+    df.index.name = '#index'
+    df.to_csv('%s/log.csv' % params['path'], sep=',')
     best_info = {
         'best_styles': optimizer.best_styles,
         'best': optimizer.best_fval
