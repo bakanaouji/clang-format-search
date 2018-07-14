@@ -1,4 +1,5 @@
 import subprocess as sp
+from copy import deepcopy
 
 
 def bool_keys():
@@ -63,8 +64,8 @@ class Function(object):
                  self.path + '/input.cpp']
         for file in files:
             sp.run(
-                'clang-format -i -style="' + str(convert(styles)) + '" ' + file,
-                stdout=sp.PIPE)
+                'clang-format -i -style="' + str(convert(deepcopy(styles)))
+                + '" ' + file, stdout=sp.PIPE)
             ret_val = sp.run('git diff --numstat ' + file, stdout=sp.PIPE)
             ret_val = ret_val.stdout.decode('utf-8').split('\t')
             if not ret_val == ['']:
