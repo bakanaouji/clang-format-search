@@ -1,0 +1,34 @@
+.DS_Store
+
+# big files
+img/
+*.pdf
+*.csv
+*.png
+*.jpg
+*.jpeg
+
+# jupyter
+.ipynb_checkpoints/
+
+# latex
+*.dvi
+*.fdb_latexmk
+*.fls
+*.log
+*.aux
+*.synctex.gz
+
+# IntelliJ
+*.eml
+# Idea
+.idea
+*.iml
+*.iws
+*.ipr
+
+log/
+__pycache__/
+jupyter/
+mldata/
+data/
