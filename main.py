@@ -12,43 +12,43 @@ def evaluate(x):
 
 def sample():
     styles = {
-        "AlignConsecutiveAssignments": False,
-        "AlignConsecutiveDeclarations": False,
-        "AlignOperands":   True,
-        "AlignTrailingComments": True,
-        "AllowAllParametersOfDeclarationOnNextLine": True,
-        "AllowShortBlocksOnASingleLine": False,
-        "AllowShortCaseLabelsOnASingleLine": False,
-        "AllowShortIfStatementsOnASingleLine": False,
-        "AllowShortLoopsOnASingleLine": False,
-        "AlwaysBreakBeforeMultilineStrings": False,
-        "AlwaysBreakTemplateDeclarations": False,
-        "BinPackArguments": True,
-        "BinPackParameters": True,
-        "BreakBeforeInheritanceComma": False,
-        "BreakBeforeTernaryOperators": True,
-        "BreakConstructorInitializersBeforeComma": False,
-        "BreakAfterJavaFieldAnnotations": False,
-        "BreakStringLiterals": True,
+        "AlignConsecutiveAssignments": bool(np.random.randint(2)),
+        "AlignConsecutiveDeclarations": bool(np.random.randint(2)),
+        "AlignOperands":   bool(np.random.randint(2)),
+        "AlignTrailingComments": bool(np.random.randint(2)),
+        "AllowAllParametersOfDeclarationOnNextLine": bool(np.random.randint(2)),
+        "AllowShortBlocksOnASingleLine": bool(np.random.randint(2)),
+        "AllowShortCaseLabelsOnASingleLine": bool(np.random.randint(2)),
+        "AllowShortIfStatementsOnASingleLine": bool(np.random.randint(2)),
+        "AllowShortLoopsOnASingleLine": bool(np.random.randint(2)),
+        "AlwaysBreakBeforeMultilineStrings": bool(np.random.randint(2)),
+        "AlwaysBreakTemplateDeclarations": bool(np.random.randint(2)),
+        "BinPackArguments": bool(np.random.randint(2)),
+        "BinPackParameters": bool(np.random.randint(2)),
+        "BreakBeforeInheritanceComma": bool(np.random.randint(2)),
+        "BreakBeforeTernaryOperators": bool(np.random.randint(2)),
+        "BreakConstructorInitializersBeforeComma": bool(np.random.randint(2)),
+        "BreakAfterJavaFieldAnnotations": bool(np.random.randint(2)),
+        "BreakStringLiterals": bool(np.random.randint(2)),
         "ColumnLimit":     80,
-        "CompactNamespaces": False,
-        "ConstructorInitializerAllOnOneLineOrOnePerLine": False,
+        "CompactNamespaces": bool(np.random.randint(2)),
+        "ConstructorInitializerAllOnOneLineOrOnePerLine": bool(np.random.randint(2)),
         "ConstructorInitializerIndentWidth": 4,
         "ContinuationIndentWidth": 4,
-        "Cpp11BracedListStyle": True,
-        "DerivePointerAlignment": False,
-        "DisableFormat":   False,
-        "ExperimentalAutoDetectBinPacking": False,
-        "FixNamespaceComments": True,
-        "IndentCaseLabels": False,
+        "Cpp11BracedListStyle": bool(np.random.randint(2)),
+        "DerivePointerAlignment": bool(np.random.randint(2)),
+        "DisableFormat":   bool(np.random.randint(2)),
+        "ExperimentalAutoDetectBinPacking": bool(np.random.randint(2)),
+        "FixNamespaceComments": bool(np.random.randint(2)),
+        "IndentCaseLabels": bool(np.random.randint(2)),
         "IndentWidth":     2,
-        "IndentWrappedFunctionNames": False,
-        "JavaScriptWrapImports": True,
-        "KeepEmptyLinesAtTheStartOfBlocks": True,
+        "IndentWrappedFunctionNames": bool(np.random.randint(2)),
+        "JavaScriptWrapImports": bool(np.random.randint(2)),
+        "KeepEmptyLinesAtTheStartOfBlocks": bool(np.random.randint(2)),
         "MaxEmptyLinesToKeep": 1,
         "ObjCBlockIndentWidth": 2,
-        "ObjCSpaceAfterProperty": False,
-        "ObjCSpaceBeforeProtocolList": True,
+        "ObjCSpaceAfterProperty": bool(np.random.randint(2)),
+        "ObjCSpaceBeforeProtocolList": bool(np.random.randint(2)),
         "PenaltyBreakAssignment": 2,
         "PenaltyBreakBeforeFirstCallParameter": 19,
         "PenaltyBreakComment": 300,
@@ -56,19 +56,19 @@ def sample():
         "PenaltyBreakString": 1000,
         "PenaltyExcessCharacter": 1000000,
         "PenaltyReturnTypeOnItsOwnLine": 60,
-        "ReflowComments":  True,
-        "SortIncludes":    True,
-        "SortUsingDeclarations": True,
-        "SpaceAfterCStyleCast": False,
-        "SpaceAfterTemplateKeyword": True,
-        "SpaceBeforeAssignmentOperators": True,
-        "SpaceInEmptyParentheses": False,
+        "ReflowComments":  bool(np.random.randint(2)),
+        "SortIncludes":    bool(np.random.randint(2)),
+        "SortUsingDeclarations": bool(np.random.randint(2)),
+        "SpaceAfterCStyleCast": bool(np.random.randint(2)),
+        "SpaceAfterTemplateKeyword": bool(np.random.randint(2)),
+        "SpaceBeforeAssignmentOperators": bool(np.random.randint(2)),
+        "SpaceInEmptyParentheses": bool(np.random.randint(2)),
         "SpacesBeforeTrailingComments": 1,
-        "SpacesInAngles":  False,
-        "SpacesInContainerLiterals": True,
-        "SpacesInCStyleCastParentheses": False,
-        "SpacesInParentheses": False,
-        "SpacesInSquareBrackets": False
+        "SpacesInAngles":  bool(np.random.randint(2)),
+        "SpacesInContainerLiterals": bool(np.random.randint(2)),
+        "SpacesInCStyleCastParentheses": bool(np.random.randint(2)),
+        "SpacesInParentheses": bool(np.random.randint(2)),
+        "SpacesInSquareBrackets": bool(np.random.randint(2))
     }
     for key, val in styles.items():
         if type(val) == bool:
@@ -80,9 +80,10 @@ def sample():
 
 
 def main():
-    x = sample()
-    eval = evaluate(x)
-    print(eval)
+    for i in range(10):
+        x = sample()
+        eval = evaluate(x)
+        print(x, eval)
 
 
 if __name__ == '__main__':
