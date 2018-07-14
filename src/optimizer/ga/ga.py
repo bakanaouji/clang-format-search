@@ -43,7 +43,7 @@ class GA(object):
         offs2 = ind2.copy()
         first = np.random.randint(size)
         last = np.random.randint(first + 1, size + 1)
-        offs1[first:last], offs2[first:last] = offs2[first:last], offs1[first:last]
+        offs1[first:last], offs2[first:last] = offs2[first:last].copy(), offs1[first:last].copy()
         offs1.f = float('inf')
         offs2.f = float('inf')
         return offs1, offs2
