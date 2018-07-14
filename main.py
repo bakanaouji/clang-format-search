@@ -2,8 +2,9 @@ import numpy as np
 import subprocess as sp
 
 
-def evaluate(x):
-    sp.run('clang-format -i -style="' + str(x) + '" sample_src/input.h', stdout=sp.PIPE)
+def evaluate(styles):
+    sp.run('clang-format -i -style="' + str(styles) + '" sample_src/input.h',
+           stdout=sp.PIPE)
     ret_val = sp.run('git diff --numstat sample_src/input.h', stdout=sp.PIPE)
     sp.run('git checkout sample_src/input.h', stdout=sp.PIPE)
     ret_val = ret_val.stdout.decode('utf-8').split('\t')
@@ -14,7 +15,7 @@ def sample():
     styles = {
         "AlignConsecutiveAssignments": bool(np.random.randint(2)),
         "AlignConsecutiveDeclarations": bool(np.random.randint(2)),
-        "AlignOperands":   bool(np.random.randint(2)),
+        "AlignOperands": bool(np.random.randint(2)),
         "AlignTrailingComments": bool(np.random.randint(2)),
         "AllowAllParametersOfDeclarationOnNextLine": bool(np.random.randint(2)),
         "AllowShortBlocksOnASingleLine": bool(np.random.randint(2)),
@@ -30,18 +31,19 @@ def sample():
         "BreakConstructorInitializersBeforeComma": bool(np.random.randint(2)),
         "BreakAfterJavaFieldAnnotations": bool(np.random.randint(2)),
         "BreakStringLiterals": bool(np.random.randint(2)),
-        "ColumnLimit":     80,
+        "ColumnLimit": 80,
         "CompactNamespaces": bool(np.random.randint(2)),
-        "ConstructorInitializerAllOnOneLineOrOnePerLine": bool(np.random.randint(2)),
+        "ConstructorInitializerAllOnOneLineOrOnePerLine": bool(
+            np.random.randint(2)),
         "ConstructorInitializerIndentWidth": 4,
         "ContinuationIndentWidth": 4,
         "Cpp11BracedListStyle": bool(np.random.randint(2)),
         "DerivePointerAlignment": bool(np.random.randint(2)),
-        "DisableFormat":   bool(np.random.randint(2)),
+        "DisableFormat": bool(np.random.randint(2)),
         "ExperimentalAutoDetectBinPacking": bool(np.random.randint(2)),
         "FixNamespaceComments": bool(np.random.randint(2)),
         "IndentCaseLabels": bool(np.random.randint(2)),
-        "IndentWidth":     2,
+        "IndentWidth": 2,
         "IndentWrappedFunctionNames": bool(np.random.randint(2)),
         "JavaScriptWrapImports": bool(np.random.randint(2)),
         "KeepEmptyLinesAtTheStartOfBlocks": bool(np.random.randint(2)),
@@ -56,20 +58,24 @@ def sample():
         "PenaltyBreakString": 1000,
         "PenaltyExcessCharacter": 1000000,
         "PenaltyReturnTypeOnItsOwnLine": 60,
-        "ReflowComments":  bool(np.random.randint(2)),
-        "SortIncludes":    bool(np.random.randint(2)),
+        "ReflowComments": bool(np.random.randint(2)),
+        "SortIncludes": bool(np.random.randint(2)),
         "SortUsingDeclarations": bool(np.random.randint(2)),
         "SpaceAfterCStyleCast": bool(np.random.randint(2)),
         "SpaceAfterTemplateKeyword": bool(np.random.randint(2)),
         "SpaceBeforeAssignmentOperators": bool(np.random.randint(2)),
         "SpaceInEmptyParentheses": bool(np.random.randint(2)),
         "SpacesBeforeTrailingComments": 1,
-        "SpacesInAngles":  bool(np.random.randint(2)),
+        "SpacesInAngles": bool(np.random.randint(2)),
         "SpacesInContainerLiterals": bool(np.random.randint(2)),
         "SpacesInCStyleCastParentheses": bool(np.random.randint(2)),
         "SpacesInParentheses": bool(np.random.randint(2)),
         "SpacesInSquareBrackets": bool(np.random.randint(2))
     }
+    return styles
+
+
+def convert(styles):
     for key, val in styles.items():
         if type(val) == bool:
             if val:
@@ -81,9 +87,10 @@ def sample():
 
 def main():
     for i in range(10):
-        x = sample()
-        eval = evaluate(x)
-        print(x, eval)
+        styles = sample()
+        styles = convert(styles)
+        eval = evaluate(styles)
+        print(styles, eval)
 
 
 if __name__ == '__main__':
