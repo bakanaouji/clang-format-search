@@ -3,12 +3,18 @@ import subprocess as sp
 
 
 def evaluate(styles):
-    sp.run('clang-format -i -style="' + str(styles) + '" sample_src/input.h',
-           stdout=sp.PIPE)
-    ret_val = sp.run('git diff --numstat sample_src/input.h', stdout=sp.PIPE)
-    sp.run('git checkout sample_src/input.h', stdout=sp.PIPE)
-    ret_val = ret_val.stdout.decode('utf-8').split('\t')
-    return int(ret_val[0]) + int(ret_val[1])
+    eval = 0
+    files = ['sample_src/input.h',
+             'sample_src/input.cpp']
+    for file in files:
+        sp.run('clang-format -i -style="' + str(styles) + '" ' + file,
+               stdout=sp.PIPE)
+        ret_val = sp.run('git diff --numstat ' + file, stdout=sp.PIPE)
+        ret_val = ret_val.stdout.decode('utf-8').split('\t')
+        if not ret_val == ['']:
+            eval += int(ret_val[0]) + int(ret_val[1])
+    sp.run('git checkout sample_src', stdout=sp.PIPE)
+    return eval
 
 
 def sample():
@@ -29,35 +35,16 @@ def sample():
         "BreakBeforeInheritanceComma": bool(np.random.randint(2)),
         "BreakBeforeTernaryOperators": bool(np.random.randint(2)),
         "BreakConstructorInitializersBeforeComma": bool(np.random.randint(2)),
-        "BreakAfterJavaFieldAnnotations": bool(np.random.randint(2)),
         "BreakStringLiterals": bool(np.random.randint(2)),
-        "ColumnLimit": 80,
         "CompactNamespaces": bool(np.random.randint(2)),
         "ConstructorInitializerAllOnOneLineOrOnePerLine": bool(
             np.random.randint(2)),
-        "ConstructorInitializerIndentWidth": 4,
-        "ContinuationIndentWidth": 4,
         "Cpp11BracedListStyle": bool(np.random.randint(2)),
         "DerivePointerAlignment": bool(np.random.randint(2)),
-        "DisableFormat": bool(np.random.randint(2)),
-        "ExperimentalAutoDetectBinPacking": bool(np.random.randint(2)),
         "FixNamespaceComments": bool(np.random.randint(2)),
         "IndentCaseLabels": bool(np.random.randint(2)),
-        "IndentWidth": 2,
         "IndentWrappedFunctionNames": bool(np.random.randint(2)),
-        "JavaScriptWrapImports": bool(np.random.randint(2)),
         "KeepEmptyLinesAtTheStartOfBlocks": bool(np.random.randint(2)),
-        "MaxEmptyLinesToKeep": 1,
-        "ObjCBlockIndentWidth": 2,
-        "ObjCSpaceAfterProperty": bool(np.random.randint(2)),
-        "ObjCSpaceBeforeProtocolList": bool(np.random.randint(2)),
-        "PenaltyBreakAssignment": 2,
-        "PenaltyBreakBeforeFirstCallParameter": 19,
-        "PenaltyBreakComment": 300,
-        "PenaltyBreakFirstLessLess": 120,
-        "PenaltyBreakString": 1000,
-        "PenaltyExcessCharacter": 1000000,
-        "PenaltyReturnTypeOnItsOwnLine": 60,
         "ReflowComments": bool(np.random.randint(2)),
         "SortIncludes": bool(np.random.randint(2)),
         "SortUsingDeclarations": bool(np.random.randint(2)),
@@ -65,7 +52,6 @@ def sample():
         "SpaceAfterTemplateKeyword": bool(np.random.randint(2)),
         "SpaceBeforeAssignmentOperators": bool(np.random.randint(2)),
         "SpaceInEmptyParentheses": bool(np.random.randint(2)),
-        "SpacesBeforeTrailingComments": 1,
         "SpacesInAngles": bool(np.random.randint(2)),
         "SpacesInContainerLiterals": bool(np.random.randint(2)),
         "SpacesInCStyleCastParentheses": bool(np.random.randint(2)),
