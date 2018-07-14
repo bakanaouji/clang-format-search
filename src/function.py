@@ -1,3 +1,4 @@
+import glob
 import subprocess as sp
 from copy import deepcopy
 
@@ -57,12 +58,14 @@ def convert(styles):
 class Function(object):
     def __init__(self, directory_path):
         self.path = directory_path
+        self.files = []
+        self.files.extend(glob.glob(self.path + '/*.h'))
+        self.files.extend(glob.glob(self.path + '/*.hpp'))
+        self.files.extend(glob.glob(self.path + '/*.cpp'))
 
     def evaluate(self, styles):
         fval = 0
-        files = [self.path + '/input.h',
-                 self.path + '/input.cpp']
-        for file in files:
+        for file in self.files:
             sp.run(
                 'clang-format -i -style="' + str(convert(deepcopy(styles)))
                 + '" ' + file, stdout=sp.PIPE)
