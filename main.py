@@ -11,8 +11,9 @@ def evaluate(x):
 
 
 def sample():
-    styles = {}
-    styles['ColumnLimit'] = np.random.randint(80)
+    styles = {
+
+    }
     return str(styles)
 
 
