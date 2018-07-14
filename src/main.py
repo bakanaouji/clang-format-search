@@ -4,8 +4,8 @@ import subprocess as sp
 
 def evaluate(styles):
     eval = 0
-    files = ['sample_src/input.h',
-             'sample_src/input.cpp']
+    files = ['../sample_src/input.h',
+             '../sample_src/input.cpp']
     for file in files:
         sp.run('clang-format -i -style="' + str(styles) + '" ' + file,
                stdout=sp.PIPE)
@@ -13,7 +13,7 @@ def evaluate(styles):
         ret_val = ret_val.stdout.decode('utf-8').split('\t')
         if not ret_val == ['']:
             eval += int(ret_val[0]) + int(ret_val[1])
-    sp.run('git checkout sample_src', stdout=sp.PIPE)
+    sp.run('git checkout ../sample_src', stdout=sp.PIPE)
     return eval
 
 
