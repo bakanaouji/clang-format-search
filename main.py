@@ -72,11 +72,17 @@ def convert(styles):
 
 
 def main():
+    best_eval = 1e10
+    best_styles = None
     for i in range(10):
         styles = sample()
         styles = convert(styles)
         eval = evaluate(styles)
-        print(styles, eval)
+        if best_eval > eval:
+            best_eval = eval
+            best_styles = styles
+        print(eval, styles)
+    print(best_eval, best_styles)
 
 
 if __name__ == '__main__':
