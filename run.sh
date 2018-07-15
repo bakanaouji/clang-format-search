@@ -5,7 +5,7 @@ git add .gitignore
 git add target_code
 cd src
 python hill_climbing_main.py
-git reset HEAD .
+git reset HEAD --hard
 git checkout .
 git checkout master
 git branch -D search
