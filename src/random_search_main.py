@@ -11,7 +11,7 @@ def main():
         'keys': bool_keys(),
         'obj_func': Function('../sample_src'),
         'path': '../log/random_search',
-        'max_evals': 100
+        'max_evals': 500
     }
     if not os.path.isdir(params['path']):
         os.makedirs(params['path'])
