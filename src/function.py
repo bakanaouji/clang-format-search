@@ -1,6 +1,7 @@
-import glob
 import subprocess as sp
+
 from copy import deepcopy
+from pathlib import Path
 
 
 def bool_keys():
@@ -59,9 +60,12 @@ class Function(object):
     def __init__(self, directory_path):
         self.path = directory_path
         self.files = []
-        self.files.extend(glob.glob(self.path + '/*.h'))
-        self.files.extend(glob.glob(self.path + '/*.hpp'))
-        self.files.extend(glob.glob(self.path + '/*.cpp'))
+        for file_name in Path(self.path).glob('**/*.h'):
+            self.files.append(str(file_name))
+        for file_name in Path(self.path).glob('**/*.hpp'):
+            self.files.append(str(file_name))
+        for file_name in Path(self.path).glob('**/*.cpp'):
+            self.files.append(str(file_name))
 
     def evaluate(self, styles):
         fval = 0
