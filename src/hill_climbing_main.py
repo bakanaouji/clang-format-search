@@ -11,7 +11,7 @@ def main():
         'keys': bool_keys(),
         'obj_func': Function('../sample_src'),
         'path': '../log/hill_climbing',
-        'max_evals': 40
+        'max_evals': len(bool_keys())
     }
     if not os.path.isdir(params['path']):
         os.makedirs(params['path'])

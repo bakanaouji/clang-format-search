@@ -1,5 +1,3 @@
-import numpy as np
-
 from copy import deepcopy
 
 
@@ -12,7 +10,7 @@ class HillClimbing(object):
         self.evals = 0
         self.styles = {}
         for key in self.keys:
-            self.styles[key] = bool(np.random.randint(2))
+            self.styles[key] = True
         self.fval = self.obj_func.evaluate(self.styles)
         self.best_styles = self.styles
         self.best_fval = self.fval
@@ -22,8 +20,6 @@ class HillClimbing(object):
         self.evals += 1
         self.styles = self.sample()
         self.fval = self.obj_func.evaluate(self.styles)
-        print(self.fval, self.styles)
-        print(self.best_fval, self.best_styles)
 
         if self.best_fval > self.fval:
             self.best_fval = self.fval
