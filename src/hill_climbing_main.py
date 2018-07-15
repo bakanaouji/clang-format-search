@@ -9,7 +9,7 @@ from optimizer.hill_climbing.hill_climbing import HillClimbing
 def main():
     params = {
         'keys': bool_keys(),
-        'obj_func': Function('../sample_src'),
+        'obj_func': Function('../target_code'),
         'path': '../log/hill_climbing',
         'max_evals': 500
     }

@@ -9,7 +9,7 @@ from optimizer.ga.ga import GA
 def main():
     params = {
         'keys': bool_keys(),
-        'obj_func': Function('../sample_src'),
+        'obj_func': Function('../target_code'),
         'path': '../log/ga',
         'max_evals': 2000,
         'pop_size': 100,

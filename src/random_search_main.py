@@ -9,7 +9,7 @@ from optimizer.random.random_search import RandomSearch
 def main():
     params = {
         'keys': bool_keys(),
-        'obj_func': Function('../sample_src'),
+        'obj_func': Function('../target_code'),
         'path': '../log/random_search',
         'max_evals': 500
     }
