@@ -1,4 +1,14 @@
 #!/bin/sh
+if [ $# -ne 1 ]; then
+    echo "Please specify search algorithm name as argument."
+    echo "algorithm name: hill_climbing, ga, random"
+    exit 1
+fi
+if [ $1 != "hill_climbing" -a $1 != "ga" -a $1 != "random" ]; then
+    echo "Please specify the correct search algorithm name as argument."
+    echo "algorithm name: hill_climbing, ga, random"
+    exit 1
+fi
 git checkout -b search
 cat .gitignore_search > .gitignore
 git add .gitignore
