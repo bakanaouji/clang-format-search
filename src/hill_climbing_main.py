@@ -11,7 +11,7 @@ def main():
         'keys': bool_keys(),
         'obj_func': Function('../sample_src'),
         'path': '../log/hill_climbing',
-        'max_evals': len(bool_keys())
+        'max_evals': 500
     }
     if not os.path.isdir(params['path']):
         os.makedirs(params['path'])
@@ -26,6 +26,8 @@ def main():
         log['evals'].append(optimizer.evals)
         log['fval'].append(optimizer.fval)
         print(optimizer.g, optimizer.fval, optimizer.styles)
+        if optimizer.done:
+            break
 
     # save log
     df = pd.DataFrame(log)
