@@ -11,7 +11,7 @@ def main():
         'keys': bool_keys(),
         'obj_func': Function('../target_code'),
         'path': '../log/ga',
-        'max_evals': 2000,
+        'max_evals': 500,
         'pop_size': 100,
         'tournament_size': 3
     }
