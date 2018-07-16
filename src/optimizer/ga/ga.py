@@ -16,12 +16,14 @@ class GA(object):
 
         self.g = 0
         self.evals = 0
+        self.done = False
         self.calc_fval()
         self.best_ind = min(self.pop, key=attrgetter('f'))
         self.best_styles = self.convert_ind_to_style(self.best_ind)
         self.best_fval = self.best_ind.f
         self.fval = self.best_fval
         self.styles = self.best_styles
+        print('ga')
 
     def convert_ind_to_style(self, ind):
         styles = {}

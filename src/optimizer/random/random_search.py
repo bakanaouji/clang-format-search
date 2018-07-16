@@ -8,6 +8,7 @@ class RandomSearch(object):
 
         self.g = 0
         self.evals = 0
+        self.done = False
         self.fval = float('inf')
         self.styles = None
         self.best_fval = float('inf')
