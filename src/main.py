@@ -41,6 +41,8 @@ def main():
         log['evals'].append(optimizer.evals)
         log['fval'].append(optimizer.fval)
         print(optimizer.g, optimizer.evals, optimizer.fval, optimizer.styles)
+        if optimizer.done:
+            break
 
     # save log
     df = pd.DataFrame(log)
