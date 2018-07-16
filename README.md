@@ -5,6 +5,8 @@ Searching styles that minimize the amount of code change by clang-format.
 ## Usage
 
 ### Quick Start
+Before running search, you need to download [clang-format 6.0.1](http://releases.llvm.org/download.html).
+
 First, put the source code to format by clang-format in `target_code` folder.
 
 Next, run the search by executing the following command.
