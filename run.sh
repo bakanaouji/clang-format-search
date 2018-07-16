@@ -22,8 +22,9 @@ elif [ $1 = "random" ]; then
     python random_search_main.py
 fi
 cd ../
-git checkout .
+git reset HEAD .gitignore
 git reset HEAD target_code
 git checkout master
-git reset HEAD --hard
+git checkout .gitignore
+git checkout target_code
 git branch -D search
