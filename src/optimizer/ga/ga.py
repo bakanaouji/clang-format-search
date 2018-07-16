@@ -36,7 +36,7 @@ class GA(object):
             if ind.f == float('inf'):
                 ind.f = self.obj_func.evaluate(styles)
                 self.evals += 1
-            print(self.evals, ind.f, styles)
+            print(self.evals, ind.f)
 
     def crossover(self, ind1, ind2):
         offs1 = ind1.copy()
