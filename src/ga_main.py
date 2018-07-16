@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 import pandas as pd
@@ -7,13 +8,19 @@ from optimizer.ga.ga import GA
 
 
 def main():
+    parser = argparse.ArgumentParser(description='Clang Format GA Search')
+    parser.add_argument('--max_evals', type=int, default=500, help='Maximum number of evaluations.')
+    parser.add_argument('--pop_size', type=int, default=100, help='Population size.')
+    parser.add_argument('--tournament_size', type=int, default=3, help='Tournament size.')
+    args = parser.parse_args()
+
     params = {
         'keys': bool_keys(),
         'obj_func': Function('../target_code'),
         'path': '../log/ga',
-        'max_evals': 500,
-        'pop_size': 100,
-        'tournament_size': 3
+        'max_evals': args.max_evals,
+        'pop_size': args.pop_size,
+        'tournament_size': args.tournament_size
     }
     if not os.path.isdir(params['path']):
         os.makedirs(params['path'])

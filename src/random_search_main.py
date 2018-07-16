@@ -1,3 +1,4 @@
+import argparse
 import json
 import os
 import pandas as pd
@@ -7,11 +8,15 @@ from optimizer.random.random_search import RandomSearch
 
 
 def main():
+    parser = argparse.ArgumentParser(description='Clang Format Random Search')
+    parser.add_argument('--max_evals', type=int, default=500, help='Maximum number of evaluations.')
+    args = parser.parse_args()
+
     params = {
         'keys': bool_keys(),
         'obj_func': Function('../target_code'),
         'path': '../log/random_search',
-        'max_evals': 500
+        'max_evals': args.max_evals
     }
     if not os.path.isdir(params['path']):
         os.makedirs(params['path'])
