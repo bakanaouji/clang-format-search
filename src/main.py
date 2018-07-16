@@ -1,8 +1,10 @@
 import json
 import os
 import pandas as pd
+import subprocess as sp
 
-from function import Function, bool_keys
+from copy import deepcopy
+from function import Function, bool_keys, convert
 from optimizer.ga.ga import GA
 from optimizer.hill_climbing.hill_climbing import HillClimbing
 from optimizer.random.random_search import RandomSearch
@@ -53,6 +55,11 @@ def main():
         'best': optimizer.best_fval
     }
     json.dump(best_info, open('%s/best.json' % params['path'], 'w'))
+    ret_val = sp.run('clang-format -style="' + str(
+        convert(deepcopy(optimizer.best_styles))) + '" -dump-config',
+                     stdout=sp.PIPE).stdout.decode('utf-8')
+    with open('%s/.clang-format' % params['path'], 'w') as f:
+        f.write(ret_val)
 
     print('best:', optimizer.best_fval)
     print('best styles:', optimizer.best_styles)
