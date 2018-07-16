@@ -23,7 +23,6 @@ class GA(object):
         self.best_fval = self.best_ind.f
         self.fval = self.best_fval
         self.styles = self.best_styles
-        print('ga')
 
     def convert_ind_to_style(self, ind):
         styles = {}
