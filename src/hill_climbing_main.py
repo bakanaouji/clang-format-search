@@ -1,4 +1,3 @@
-import argparse
 import json
 import os
 import pandas as pd
@@ -8,15 +7,13 @@ from optimizer.hill_climbing.hill_climbing import HillClimbing
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Clang Format Hill Climbing Search')
-    parser.add_argument('--max_evals', type=int, default=500, help='Maximum number of evaluations.')
-    args = parser.parse_args()
-
+    with open('../config.json') as f:
+        config = json.load(f)
     params = {
         'keys': bool_keys(),
         'obj_func': Function('../target_code'),
         'path': '../log/hill_climbing',
-        'max_evals': args.max_evals
+        'max_evals': config['max_evals'],
     }
     if not os.path.isdir(params['path']):
         os.makedirs(params['path'])
