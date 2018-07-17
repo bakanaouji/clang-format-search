@@ -1,5 +1,5 @@
 #!/bin/sh
-git checkout -b check
+git checkout -b count
 cat .gitignore_search > .gitignore
 git add .gitignore
 git add target_code
@@ -11,4 +11,4 @@ git reset HEAD target_code
 git checkout master
 git checkout .gitignore
 git checkout target_code
-git branch -D check
+git branch -D count
