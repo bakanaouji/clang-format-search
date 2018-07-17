@@ -79,3 +79,15 @@ class Function(object):
                 fval += int(ret_val[0]) + int(ret_val[1])
         sp.run('git checkout ' + self.path, stdout=sp.PIPE)
         return fval
+
+    def evaluate_dot_clang_format(self):
+        fval = 0
+        for file in self.files:
+            sp.run(
+                'clang-format -i -style=file ' + file, stdout=sp.PIPE)
+            ret_val = sp.run('git diff --numstat ' + file, stdout=sp.PIPE)
+            ret_val = ret_val.stdout.decode('utf-8').split('\t')
+            if not ret_val == ['']:
+                fval += int(ret_val[0]) + int(ret_val[1])
+        sp.run('git checkout ' + self.path, stdout=sp.PIPE)
+        return fval
