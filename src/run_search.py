@@ -55,8 +55,14 @@ def main():
         'best': optimizer.best_fval
     }
     json.dump(best_info, open('%s/best.json' % params['path'], 'w'))
-    ret_val = sp.run('clang-format -style="' + str(
-        convert(deepcopy(optimizer.best_styles))) + '" -dump-config',
+    default_style = {}
+    if os.path.exists('../default-style.json'):
+        with open('../default-style.json') as f:
+            default_style = json.load(f)
+    best_styles = deepcopy(optimizer.best_styles)
+    best_styles.update(default_style)
+    best_styles = str(convert(best_styles))
+    ret_val = sp.run('clang-format -style="' + best_styles + '" -dump-config',
                      stdout=sp.PIPE).stdout.decode('utf-8')
     with open('%s/.clang-format' % params['path'], 'w') as f:
         f.write(ret_val)
