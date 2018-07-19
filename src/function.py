@@ -83,10 +83,10 @@ class Function(object):
 
     def evaluate(self, styles):
         fval = 0
+        merged_styles = deepcopy(styles)
+        merged_styles.update(self.default_style)
+        merged_styles = str(convert(merged_styles))
         for file in self.files:
-            merged_styles = deepcopy(styles)
-            merged_styles.update(self.default_style)
-            merged_styles = str(convert(merged_styles))
             sp.run(
                 'clang-format -i -style="' + merged_styles
                 + '" ' + file, stdout=sp.PIPE)
