@@ -55,6 +55,14 @@ def convert(styles):
                 styles[key] = 'true'
             else:
                 styles[key] = 'false'
+        # for nest block
+        if type(val) == dict:
+            for val_key, val_val in val.items():
+                if type(val_val) == bool:
+                    if val_val:
+                        val[val_key] = 'true'
+                    else:
+                        val[val_key] = 'false'
     return str(styles)
 
 
@@ -76,8 +84,11 @@ class Function(object):
     def evaluate(self, styles):
         fval = 0
         for file in self.files:
+            merged_styles = deepcopy(styles)
+            merged_styles.update(self.default_style)
+            merged_styles = str(convert(merged_styles))
             sp.run(
-                'clang-format -i -style="' + str(convert(deepcopy(styles)))
+                'clang-format -i -style="' + merged_styles
                 + '" ' + file, stdout=sp.PIPE)
             ret_val = sp.run('git diff --numstat ' + file, stdout=sp.PIPE)
             ret_val = ret_val.stdout.decode('utf-8').split('\t')
