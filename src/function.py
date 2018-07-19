@@ -44,7 +44,18 @@ def style_maps():
         'SpacesInContainerLiterals': ['true', 'false'],
         'SpacesInCStyleCastParentheses': ['true', 'false'],
         'SpacesInParentheses': ['true', 'false'],
-        'SpacesInSquareBrackets': ['true', 'false']
+        'SpacesInSquareBrackets': ['true', 'false'],
+        'AlignAfterOpenBracket': ['Align', 'DontAlign', 'AlwaysBreak'],
+        'AlignEscapedNewlines': ['DontAlign', 'Left', 'Right'],
+        'AllowShortFunctionsOnASingleLine': ['None', 'InlineOnly', 'Empty', 'Inline', 'All'],
+        'AlwaysBreakAfterReturnType': ['None', 'All', 'TopLevel', 'AllDefinitions', 'TopLevelDefinitions'],
+        'BreakBeforeBinaryOperators': ['None', 'NonAssignment', 'All'],
+        'BreakConstructorInitializers': ['BeforeColon', 'BeforeComma', 'AfterColon'],
+        'IncludeBlocks': ['Preserve', 'Merge', 'Regroup'],
+        'IndentPPDirectives': ['None', 'AfterHash'],
+        'NamespaceIndentation': ['None', 'Inner', 'All'],
+        'PointerAlignment': ['Left', 'Middle', 'Right'],
+        'SpaceBeforeParens': ['Never', 'ControlStatements', 'Always'],
         }
 
 
