@@ -6,12 +6,16 @@ from optimizer.ga.individual import Individual
 
 class GA(object):
     def __init__(self, **params):
-        self.keys = params['keys']
+        self.maps = params['maps']
+        self.keys = []
+        for key in self.maps.keys():
+            self.keys.append(key)
+        self.keys = sorted(self.keys)
         self.obj_func = params['obj_func']
         self.pop_size = params['pop_size']
         self.tournament_size = params['tournament_size']
         self.dim = len(self.keys)
-        self.pop = [Individual([np.random.randint(2) for _ in range(self.dim)])
+        self.pop = [Individual([np.random.randint(len(self.maps[self.keys[i]])) for i in range(self.dim)])
                     for _ in range(self.pop_size)]
 
         self.g = 0
@@ -27,7 +31,7 @@ class GA(object):
     def convert_ind_to_style(self, ind):
         styles = {}
         for i in range(len(self.keys)):
-            styles[self.keys[i]] = bool(ind[i])
+            styles[self.keys[i]] = self.maps[self.keys[i]][ind[i]]
         return styles
 
     def calc_fval(self):
@@ -52,7 +56,9 @@ class GA(object):
         mutant = ind.copy()
         for i in range(len(ind)):
             if np.random.random() < 0.05:
-                mutant[i] = not ind[i]
+                vals = self.maps[self.keys[i]]
+                indexes = [j for j in range(len(vals)) if j != ind[i]]
+                mutant[i] = np.random.choice(indexes)
         mutant.f = float('inf')
         return mutant
 
