@@ -7,3 +7,4 @@ __pycache__/
 log/
 target_code/*
 !.gitkeep
+default-clang-format
