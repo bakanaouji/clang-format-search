@@ -24,7 +24,7 @@ def main():
 
     params = {
         'keys': bool_keys(),
-        'obj_func': Function('../target_code'),
+        'obj_func': Function('../target_code', '../default-style.json'),
         'path': '../log/' + optimizer_name,
         'max_evals': config['max_evals'],
         'pop_size': config['ga_pop_size'],

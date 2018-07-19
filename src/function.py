@@ -1,3 +1,5 @@
+import json
+import os
 import subprocess as sp
 
 from copy import deepcopy
@@ -57,7 +59,7 @@ def convert(styles):
 
 
 class Function(object):
-    def __init__(self, directory_path):
+    def __init__(self, directory_path, default_style_path):
         self.path = directory_path
         self.files = []
         for file_name in Path(self.path).glob('**/*.h'):
@@ -66,6 +68,10 @@ class Function(object):
             self.files.append(str(file_name))
         for file_name in Path(self.path).glob('**/*.cpp'):
             self.files.append(str(file_name))
+        self.default_style = {}
+        if os.path.exists(default_style_path):
+            with open(default_style_path) as f:
+                self.default_style = json.load(f)
 
     def evaluate(self, styles):
         fval = 0
