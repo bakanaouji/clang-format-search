@@ -4,7 +4,7 @@ import pandas as pd
 import subprocess as sp
 
 from copy import deepcopy
-from function import Function, bool_keys, convert
+from function import Function, style_maps, convert
 from optimizer.ga.ga import GA
 from optimizer.hill_climbing.hill_climbing import HillClimbing
 from optimizer.random.random_search import RandomSearch
@@ -23,7 +23,7 @@ def main():
         optimizer = RandomSearch
 
     params = {
-        'keys': bool_keys(),
+        'maps': style_maps(),
         'obj_func': Function('../target_code', '../default-style.json'),
         'path': '../log/' + optimizer_name,
         'max_evals': config['max_evals'],

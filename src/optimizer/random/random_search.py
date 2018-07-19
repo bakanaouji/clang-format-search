@@ -3,7 +3,7 @@ import numpy as np
 
 class RandomSearch(object):
     def __init__(self, **params):
-        self.keys = params['keys']
+        self.maps = params['maps']
         self.obj_func = params['obj_func']
 
         self.g = 0
@@ -26,6 +26,6 @@ class RandomSearch(object):
 
     def sample(self):
         styles = {}
-        for key in self.keys:
-            styles[key] = bool(np.random.randint(2))
+        for key, val in self.maps.items():
+            styles[key] = np.random.choice(val)
         return styles

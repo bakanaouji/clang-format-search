@@ -3,7 +3,7 @@ from copy import deepcopy
 
 class HillClimbing(object):
     def __init__(self, **params):
-        self.keys = params['keys']
+        self.maps = params['maps']
         self.obj_func = params['obj_func']
 
         self.g = 0
@@ -11,31 +11,35 @@ class HillClimbing(object):
         self.done = False
         self.evals = 0
         self.styles = {}
-        for key in self.keys:
-            self.styles[key] = True
+        self.keys = []
+        for key, vals in self.maps.items():
+            self.styles[key] = vals[0]
+            self.keys.append(key)
+        self.keys = sorted(self.keys)
         self.fval = self.obj_func.evaluate(self.styles)
         self.best_styles = self.styles
         self.best_fval = self.fval
 
     def one_iteration(self):
         self.g += 1
-        self.evals += 1
-        self.styles = self.sample()
-        self.fval = self.obj_func.evaluate(self.styles)
 
-        if self.best_fval > self.fval:
-            self.best_fval = self.fval
-            self.best_styles = self.styles
-            self.improved = True
+        key = self.keys[(self.g - 1) % len(self.keys)]
+        vals = self.maps[key]
+        vals = [val for val in vals if val != self.best_styles[key]]
 
-        if self.g % len(self.keys) == 0:
+        for val in vals:
+            self.evals += 1
+            self.styles = deepcopy(self.best_styles)
+            self.styles[key] = val
+            self.fval = self.obj_func.evaluate(self.styles)
+
+            if self.best_fval > self.fval:
+                self.best_fval = self.fval
+                self.best_styles = self.styles
+                self.improved = True
+
+        if self.g % len(self.maps) == 0:
             if not self.improved:
                 self.done = True
             else:
                 self.improved = False
-
-    def sample(self):
-        key = self.keys[(self.g - 1) % len(self.keys)]
-        styles = deepcopy(self.best_styles)
-        styles[key] = not styles[key]
-        return styles
