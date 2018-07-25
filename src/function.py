@@ -74,7 +74,7 @@ def convert(styles):
                         val[val_key] = 'true'
                     else:
                         val[val_key] = 'false'
-    return str(styles)
+    return styles
 
 
 class Function(object):
