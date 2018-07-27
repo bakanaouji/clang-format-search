@@ -28,7 +28,8 @@ def main():
         'path': '../log/' + optimizer_name,
         'max_evals': config['max_evals'],
         'pop_size': config['ga_pop_size'],
-        'tournament_size': config['ga_tournament_size']
+        'tournament_size': config['ga_tournament_size'],
+        'pipe_to_hill_climbing': config['ga_pipe_to_hill_climbing']
     }
     if not os.path.isdir(params['path']):
         os.makedirs(params['path'])
@@ -36,15 +37,27 @@ def main():
 
     # optimize
     log = {'g': [], 'evals': [], 'fval': []}
-    while optimizer.evals < params['max_evals']:
+    g_offset, evals_offset = 0, 0
+    while True:
         optimizer.one_iteration()
         # stock log
-        log['g'].append(optimizer.g)
-        log['evals'].append(optimizer.evals)
+        log['g'].append(optimizer.g + g_offset)
+        log['evals'].append(optimizer.evals + evals_offset)
         log['fval'].append(optimizer.fval)
-        print(optimizer.g, optimizer.evals, optimizer.fval, optimizer.styles)
-        if optimizer.done:
-            break
+        print(optimizer.g + g_offset, optimizer.evals + evals_offset,
+              optimizer.fval, optimizer.styles)
+        if optimizer.evals >= params['max_evals'] or optimizer.done:
+            if optimizer_name == 'ga' and params['pipe_to_hill_climbing']:
+                print('best:', optimizer.best_fval)
+                print('best styles:', optimizer.best_styles)
+                print('pipe to hill climbing')
+                params['pipe_to_hill_climbing'] = False
+                params['initial_styles'] = optimizer.styles
+                g_offset = optimizer.g
+                evals_offset = optimizer.evals
+                optimizer = HillClimbing(**params)
+            else:
+                break
 
     # save log
     df = pd.DataFrame(log)

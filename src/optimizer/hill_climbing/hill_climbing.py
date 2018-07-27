@@ -12,9 +12,14 @@ class HillClimbing(object):
         self.evals = 0
         self.styles = {}
         self.keys = []
-        for key, vals in self.maps.items():
-            self.styles[key] = vals[0]
-            self.keys.append(key)
+        if 'initial_styles' in params.keys():
+            for key in self.maps.keys():
+                self.styles[key] = params['initial_styles'][key]
+                self.keys.append(key)
+        else:
+            for key, vals in self.maps.items():
+                self.styles[key] = vals[0]
+                self.keys.append(key)
         self.keys = sorted(self.keys)
         self.fval = self.obj_func.evaluate(self.styles)
         self.best_styles = self.styles
