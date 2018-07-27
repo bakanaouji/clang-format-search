@@ -3,7 +3,6 @@ import os
 import subprocess as sp
 
 from copy import deepcopy
-from pathlib import Path
 
 
 def style_maps():
@@ -86,11 +85,17 @@ class Function(object):
                 self.default_style = json.load(f)
 
     def evaluate(self, styles):
-        fval = 0
         merged_styles = deepcopy(styles)
         merged_styles.update(self.default_style)
         merged_styles = str(convert(merged_styles))
-        sp.run(['sh', '../evaluate_target_code.sh', self.path, merged_styles],
+        return self.evaluate_core(merged_styles)
+
+    def evaluate_dot_clang_format(self):
+        return self.evaluate_core('file')
+
+    def evaluate_core(self, styles_str):
+        fval = 0
+        sp.run(['sh', '../evaluate_target_code.sh', self.path, styles_str],
                stdout=sp.PIPE)
         ret_val = sp.run(['git', 'diff', '--numstat', self.path],
                          stdout=sp.PIPE)
@@ -102,16 +107,3 @@ class Function(object):
         sp.run('git checkout ' + self.path, stdout=sp.PIPE)
         return fval
 
-    def evaluate_dot_clang_format(self):
-        fval = 0
-        sp.run(['sh', '../evaluate_target_code.sh', self.path, 'file'],
-               stdout=sp.PIPE)
-        ret_val = sp.run(['git', 'diff', '--numstat', self.path],
-                         stdout=sp.PIPE)
-        ret_vals = ret_val.stdout.decode('utf-8').split('\n')
-        for val in ret_vals:
-            split_val = val.split('\t')
-            if not split_val == ['']:
-                fval += int(split_val[0]) + int(split_val[1])
-        sp.run('git checkout ' + self.path, stdout=sp.PIPE)
-        return fval
