@@ -97,14 +97,15 @@ class Function(object):
         merged_styles = deepcopy(styles)
         merged_styles.update(self.default_style)
         merged_styles = str(convert(merged_styles))
-        for file in self.files:
-            sp.run(
-                'clang-format -i -style="' + merged_styles
-                + '" ' + file, stdout=sp.PIPE)
-            ret_val = sp.run('git diff --numstat ' + file, stdout=sp.PIPE)
-            ret_val = ret_val.stdout.decode('utf-8').split('\t')
-            if not ret_val == ['']:
-                fval += int(ret_val[0]) + int(ret_val[1])
+        sp.run(['sh', '../evaluate_target_code.sh', self.path, merged_styles],
+               stdout=sp.PIPE)
+        ret_val = sp.run(['git', 'diff', '--numstat', self.path],
+                         stdout=sp.PIPE)
+        ret_vals = ret_val.stdout.decode('utf-8').split('\n')
+        for val in ret_vals:
+            split_val = val.split('\t')
+            if not split_val == ['']:
+                fval += int(split_val[0]) + int(split_val[1])
         sp.run('git checkout ' + self.path, stdout=sp.PIPE)
         return fval
 
