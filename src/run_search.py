@@ -11,9 +11,21 @@ from optimizer.random.random_search import RandomSearch
 
 
 def main():
-    optimizer = None
+    # initializer parameter of experiment
     with open('../config.json') as f:
         config = json.load(f)
+    params = {
+        'maps': style_maps(),
+        'obj_func': Function('../target_code', '../default-style.json'),
+        'path': '../log/' + config['optimizer'],
+        'max_evals': config['max_evals'],
+        'pop_size': config['ga_pop_size'],
+        'tournament_size': config['ga_tournament_size'],
+        'pipe_to_hill_climbing': config['ga_pipe_to_hill_climbing']
+    }
+
+    # initialize optimizer
+    optimizer = None
     optimizer_name = config['optimizer']
     if optimizer_name == 'ga':
         optimizer = GA
@@ -21,19 +33,10 @@ def main():
         optimizer = HillClimbing
     elif optimizer_name == 'random':
         optimizer = RandomSearch
+    optimizer = optimizer(**params)
 
-    params = {
-        'maps': style_maps(),
-        'obj_func': Function('../target_code', '../default-style.json'),
-        'path': '../log/' + optimizer_name,
-        'max_evals': config['max_evals'],
-        'pop_size': config['ga_pop_size'],
-        'tournament_size': config['ga_tournament_size'],
-        'pipe_to_hill_climbing': config['ga_pipe_to_hill_climbing']
-    }
     if not os.path.isdir(params['path']):
         os.makedirs(params['path'])
-    optimizer = optimizer(**params)
 
     # optimize
     log = {'g': [], 'evals': [], 'fval': []}
