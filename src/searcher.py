@@ -38,9 +38,11 @@ class Searcher(object):
             log['g'].append(self.optimizer.g + g_offset)
             log['evals'].append(self.optimizer.evals + evals_offset)
             log['fval'].append(self.optimizer.fval)
-            print(self.optimizer.g + g_offset, self.optimizer.evals + evals_offset,
-                  self.optimizer.fval, self.optimizer.styles)
-            if self.optimizer.evals >= self.params['max_evals'] or self.optimizer.done:
+            print(self.optimizer.g + g_offset,
+                  self.optimizer.evals + evals_offset, self.optimizer.fval,
+                  self.optimizer.styles)
+            if self.optimizer.evals >= self.params['max_evals'] or \
+                    self.optimizer.done:
                 if self.params['optimizer'] == 'ga' \
                         and self.params['pipe_to_hill_climbing']:
                     print('best:', self.optimizer.best_fval)
@@ -70,7 +72,8 @@ class Searcher(object):
         best_styles = deepcopy(self.optimizer.best_styles)
         best_styles.update(default_style)
         best_styles = str(convert(best_styles))
-        ret_val = sp.run('clang-format -style="' + best_styles + '" -dump-config',
+        ret_val = sp.run('clang-format -style="' + best_styles +
+                         '" -dump-config',
                          stdout=sp.PIPE).stdout.decode('utf-8')
         with open('%s/.clang-format' % self.params['path'], 'w') as f:
             f.write(ret_val)
