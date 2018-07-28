@@ -15,7 +15,8 @@ class GA(object):
         self.pop_size = params['pop_size']
         self.tournament_size = params['tournament_size']
         self.dim = len(self.keys)
-        self.pop = [Individual([np.random.randint(len(self.maps[self.keys[i]])) for i in range(self.dim)])
+        self.pop = [Individual([np.random.randint(len(self.maps[self.keys[i]]))
+                                for i in range(self.dim)])
                     for _ in range(self.pop_size)]
 
         self.g = 0
@@ -40,7 +41,8 @@ class GA(object):
             if ind.f == float('inf'):
                 ind.f = self.obj_func.evaluate(styles)
                 self.evals += 1
-            print(self.evals, ind.f)
+            print('generation: %d, evaluation count: %d, fval: %f' %
+                  (self.g, self.evals, ind.f))
 
     def crossover(self, ind1, ind2):
         offs1 = ind1.copy()

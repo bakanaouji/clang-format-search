@@ -32,22 +32,24 @@ class Searcher(object):
         # optimize
         log = {'g': [], 'evals': [], 'fval': []}
         g_offset, evals_offset = 0, 0
+
         while True:
             self.optimizer.one_iteration()
             # stock log
             log['g'].append(self.optimizer.g + g_offset)
             log['evals'].append(self.optimizer.evals + evals_offset)
             log['fval'].append(self.optimizer.fval)
-            print(self.optimizer.g + g_offset,
-                  self.optimizer.evals + evals_offset, self.optimizer.fval,
-                  self.optimizer.styles)
+            print('generation: %d, evaluation count: %d, fval: %f, styles: %s\n'
+                  % (self.optimizer.g + g_offset,
+                     self.optimizer.evals + evals_offset, self.optimizer.fval,
+                     self.optimizer.styles))
             if self.optimizer.evals >= self.params['max_evals'] or \
                     self.optimizer.done:
                 if self.params['optimizer'] == 'ga' \
                         and self.params['pipe_to_hill_climbing']:
-                    print('best:', self.optimizer.best_fval)
-                    print('best styles:', self.optimizer.best_styles)
-                    print('pipe to hill climbing')
+                    print('best: %f' % self.optimizer.best_fval)
+                    print('best styles: %s' % self.optimizer.best_styles)
+                    print('----------pipe to hill climbing----------\n')
                     self.params['pipe_to_hill_climbing'] = False
                     self.params['initial_styles'] = self.optimizer.styles
                     g_offset = self.optimizer.g
@@ -78,5 +80,5 @@ class Searcher(object):
         with open('%s/.clang-format' % self.params['path'], 'w') as f:
             f.write(ret_val)
 
-        print('best:', self.optimizer.best_fval)
-        print('best styles:', self.optimizer.best_styles)
+        print('best: %f' % self.optimizer.best_fval)
+        print('best styles: %s\n' % self.optimizer.best_styles)

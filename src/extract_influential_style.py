@@ -4,6 +4,7 @@ import yaml
 from copy import deepcopy
 from function import Function, convert, style_maps
 
+
 def main():
     obj_func = Function('../target_code', '../default-style.json')
 
@@ -18,7 +19,7 @@ def main():
         keys.append(key)
     keys = sorted(keys)
 
-    exclusion_keys = [key for key in best_styles.keys() if not key in keys]
+    exclusion_keys = [key for key in best_styles.keys() if not (key in keys)]
     for key in exclusion_keys:
         best_styles.pop(key)
 
@@ -33,7 +34,7 @@ def main():
         is_influential = False
         vals = maps[key]
         vals = [val for val in vals if val != best_styles[key]]
-    
+
         for val in vals:
             styles = deepcopy(best_styles)
             styles[key] = val
@@ -42,7 +43,8 @@ def main():
             if fval != best_fval:
                 is_influential = True
 
-        print('%s is %s\n' % (key, 'influential' if is_influential else 'uninfluential'))
+        print('%s is %s\n' %
+              (key, 'influential' if is_influential else 'uninfluential'))
 
         if is_influential:
             influential_keys.append(key)
@@ -51,6 +53,7 @@ def main():
 
     print('influential keys: %s\n' % influential_keys)
     print('uninfluential keys: %s\n' % uninfluential_keys)
+
 
 if __name__ == '__main__':
     main()

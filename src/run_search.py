@@ -23,6 +23,7 @@ def initialize_parameter():
 def main():
     params = initialize_parameter()
 
+    print('----------run %s search----------\n' % params['optimizer'])
     searcher = Searcher(**params)
     searcher.optimize()
 
