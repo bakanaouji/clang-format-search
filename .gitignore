@@ -1,9 +1,5 @@
 .DS_Store
 
-# Idea
-.idea
-
-__pycache__/
 log/
 target_code/*
 !.gitkeep

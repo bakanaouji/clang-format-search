@@ -1,8 +1,4 @@
 .DS_Store
 
-# Idea
-.idea
-
-__pycache__/
 log/
 default-style.yml

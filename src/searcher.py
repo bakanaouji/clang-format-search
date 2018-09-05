@@ -67,7 +67,8 @@ class Searcher(object):
             'best': self.optimizer.best_fval
         }
         yaml.dump(best_info, open('%s/best.yml' % self.params['path'], 'w'),
-                  explicit_start=True, explicit_end=True)
+                  explicit_start=True, explicit_end=True,
+                  default_flow_style=False)
         default_style = {}
         if os.path.exists('../default-style.yml'):
             with open('../default-style.yml') as f:
