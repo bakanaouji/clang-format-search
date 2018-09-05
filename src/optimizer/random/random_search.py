@@ -27,5 +27,5 @@ class RandomSearch(object):
     def sample(self):
         styles = {}
         for key, val in self.maps.items():
-            styles[key] = np.random.choice(val)
+            styles[key] = str(np.random.choice(val))
         return styles
