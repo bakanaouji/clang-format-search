@@ -16,8 +16,8 @@ Next, run the search by executing the following command.
 sh run_search.sh
 ```
 
-The best styles are saved to `log/<algorithm name>/best.json` and `log/<algorithm name>/.clang-format`.
-The transition of the evaluation value is saved in `log/<algorithm name>/log.csv`.
+The best styles are saved to `log/<algorithm name>/best.yml` and `log/<algorithm name>/.clang-format`.
+The transition of the evaluation value is saved to `log/<algorithm name>/log.csv`.
 
 ### Change Search Algorithm
 

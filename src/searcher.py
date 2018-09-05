@@ -2,6 +2,7 @@ import json
 import os
 import pandas as pd
 import subprocess as sp
+import yaml
 
 from copy import deepcopy
 from function import convert
@@ -66,7 +67,8 @@ class Searcher(object):
             'best_styles': self.optimizer.best_styles,
             'best': self.optimizer.best_fval
         }
-        json.dump(best_info, open('%s/best.json' % self.params['path'], 'w'))
+        yaml.dump(best_info, open('%s/best.yml' % self.params['path'], 'w'),
+                  explicit_start=True, explicit_end=True)
         default_style = {}
         if os.path.exists('../default-style.json'):
             with open('../default-style.json') as f:
