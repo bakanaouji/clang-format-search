@@ -1,6 +1,6 @@
-import json
 import os
 import subprocess as sp
+import yaml
 
 from copy import deepcopy
 
@@ -77,12 +77,13 @@ def convert(styles):
 
 
 class Function(object):
-    def __init__(self, directory_path, default_style_path):
+    def __init__(self, directory_path, default_style_path=None):
         self.path = directory_path
         self.default_style = {}
-        if os.path.exists(default_style_path):
+        if default_style_path is not None and \
+                os.path.exists(default_style_path):
             with open(default_style_path) as f:
-                self.default_style = json.load(f)
+                self.default_style = yaml.load(f)
 
     def evaluate(self, styles):
         merged_styles = deepcopy(styles)

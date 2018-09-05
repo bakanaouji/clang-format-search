@@ -1,4 +1,3 @@
-import json
 import os
 import pandas as pd
 import subprocess as sp
@@ -70,9 +69,9 @@ class Searcher(object):
         yaml.dump(best_info, open('%s/best.yml' % self.params['path'], 'w'),
                   explicit_start=True, explicit_end=True)
         default_style = {}
-        if os.path.exists('../default-style.json'):
-            with open('../default-style.json') as f:
-                default_style = json.load(f)
+        if os.path.exists('../default-style.yml'):
+            with open('../default-style.yml') as f:
+                default_style = yaml.load(f)
         best_styles = deepcopy(self.optimizer.best_styles)
         best_styles.update(default_style)
         best_styles = str(convert(best_styles))

@@ -9,7 +9,7 @@ def initialize_parameter():
         config = yaml.load(f)
     params = {
         'maps': style_maps(),
-        'obj_func': Function('../target_code', '../default-style.json'),
+        'obj_func': Function('../target_code', '../default-style.yml'),
         'optimizer': config['optimizer'],
         'path': '../log/' + config['optimizer'],
         'max_evals': config['max_evals'],

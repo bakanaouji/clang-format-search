@@ -6,7 +6,7 @@ from function import Function, convert, style_maps
 
 
 def main():
-    obj_func = Function('../target_code', '../default-style.json')
+    obj_func = Function('../target_code')
 
     best_styles = {}
     if os.path.exists('../.clang-format'):

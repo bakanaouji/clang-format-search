@@ -8,4 +8,4 @@ log/
 target_code/*
 !.gitkeep
 .clang-format
-default-style.json
+default-style.yml
