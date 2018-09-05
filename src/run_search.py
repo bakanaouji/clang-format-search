@@ -1,12 +1,12 @@
-import json
+import yaml
 
 from function import Function, style_maps
 from searcher import Searcher
 
 
 def initialize_parameter():
-    with open('../config.json') as f:
-        config = json.load(f)
+    with open('../config.yml') as f:
+        config = yaml.load(f)
     params = {
         'maps': style_maps(),
         'obj_func': Function('../target_code', '../default-style.json'),
