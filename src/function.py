@@ -104,6 +104,6 @@ class Function(object):
             split_val = val.split('\t')
             if not split_val == ['']:
                 fval += int(split_val[0]) + int(split_val[1])
-        sp.run('git checkout ' + self.path, stdout=sp.PIPE)
+        sp.run(['git', 'checkout', self.path], stdout=sp.PIPE)
         return fval
 

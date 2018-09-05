@@ -74,8 +74,7 @@ class Searcher(object):
         best_styles = deepcopy(self.optimizer.best_styles)
         best_styles.update(default_style)
         best_styles = str(convert(best_styles))
-        ret_val = sp.run('clang-format -style="' + best_styles +
-                         '" -dump-config',
+        ret_val = sp.run(['sh', '../dump_config.sh', best_styles],
                          stdout=sp.PIPE).stdout.decode('utf-8')
         with open('%s/.clang-format' % self.params['path'], 'w') as f:
             f.write(ret_val)
