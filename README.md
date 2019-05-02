@@ -1,14 +1,14 @@
 # clang-format-search
 
-Searching styles that minimize the amount of code change by clang-format.
+This is an implementation of the algorithm that searches for the clang-format style that minimizes the number of lines of changed code.
 
 ## Usage
 
-Before running search, you need to download [clang-format 6.0.0 or 6.0.1](http://releases.llvm.org/download.html).
+Before running the search, you need to download [clang-format 6.0.0 or 6.0.1](http://releases.llvm.org/download.html).
 
 ### Quick Start
 
-First, put the source code to format by clang-format in `target_code` folder.
+First, put the source code that you want to format by clang-format in `target_code` folder.
 
 Next, run the search by executing the following command.
 
@@ -16,14 +16,14 @@ Next, run the search by executing the following command.
 sh run_search.sh
 ```
 
-The best styles are saved to `log/<algorithm name>/best.yml` and `log/<algorithm name>/.clang-format`.
+The best style is saved to `log/<algorithm name>/best.yml` and `log/<algorithm name>/.clang-format`.
 The transition of the evaluation value is saved to `log/<algorithm name>/log.csv`.
 
 ### Change Search Algorithm
 
-The search algorithm can be selected from GA, Hill Climbing, Random Search.
+The search algorithm can be selected from GA, Hill Climbing or Random Search.
 The default algorithm is Hill Climbing.
-If you want to change the search algorithm, change `optimizer` in `config.yml` to `ga` or `random`.
+If you want to change the search algorithm, change `optimizer` in `config.yml` to `ga`, `hill_climbing` or `random`.
 
 ```
 ---
