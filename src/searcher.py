@@ -62,6 +62,8 @@ class Searcher(object):
         if os.path.exists('../default-style.yml'):
             with open('../default-style.yml') as f:
                 default_style = yaml.load(f)
+                if default_style is None:
+                    default_style = {}
         best_styles = deepcopy(self.optimizer.best_styles)
         best_styles.update(default_style)
         best_styles = str(convert(best_styles))
