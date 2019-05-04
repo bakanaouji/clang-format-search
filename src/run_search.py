@@ -14,8 +14,7 @@ def initialize_parameter():
         'path': '../log/' + config['optimizer'],
         'max_evals': config['max_evals'],
         'pop_size': config['ga_pop_size'],
-        'tournament_size': config['ga_tournament_size'],
-        'pipe_to_hill_climbing': config['ga_pipe_to_hill_climbing']
+        'tournament_size': config['ga_tournament_size']
     }
     return params
 

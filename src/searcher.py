@@ -45,18 +45,7 @@ class Searcher(object):
                      self.optimizer.styles))
             if self.optimizer.evals >= self.params['max_evals'] or \
                     self.optimizer.done:
-                if self.params['optimizer'] == 'ga' \
-                        and self.params['pipe_to_hill_climbing']:
-                    print('best: %f' % self.optimizer.best_fval)
-                    print('best styles: %s' % self.optimizer.best_styles)
-                    print('----------pipe to hill climbing----------\n')
-                    self.params['pipe_to_hill_climbing'] = False
-                    self.params['initial_styles'] = self.optimizer.styles
-                    g_offset = self.optimizer.g
-                    evals_offset = self.optimizer.evals
-                    self.optimizer = HillClimbing(**self.params)
-                else:
-                    break
+                break
 
         # save log
         df = pd.DataFrame(log)

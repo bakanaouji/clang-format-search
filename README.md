@@ -31,12 +31,11 @@ optimizer: ga
 max_evals: 500
 ga_pop_size: 100
 ga_tournament_size: 3
-ga_pipe_to_hill_climbing: false
 ...
 ```
 
 ### Change Algorithm Parameter
 You can also set the maximum number of evaluations by changing value of `max_evals` in `config.yml`.
 
-When using GA as the search algorithm, you can set the population size and the tournament size by changing value of `ga_pop_size`, `ga_tournament_size` and `ga_pipe_to_hill_climbing`.
+When using GA as the search algorithm, you can set the population size and the tournament size by changing value of `ga_pop_size`, `ga_tournament_size`.
 These three parameters are only used when using GA as the search algorithm.
