@@ -4,4 +4,3 @@ log/
 target_code/*
 !.gitkeep
 .clang-format
-default-style.yml

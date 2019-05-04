@@ -84,6 +84,8 @@ class Function(object):
                 os.path.exists(default_style_path):
             with open(default_style_path) as f:
                 self.default_style = yaml.load(f)
+                if self.default_style is None:
+                    self.default_style = {}
 
     def evaluate(self, styles):
         merged_styles = deepcopy(styles)
